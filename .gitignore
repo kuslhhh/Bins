@@ -122,10 +122,33 @@ yarn-error.log*
 pnpm-lock.yaml
 package-lock.json
 
-# Prisma
-prisma/migrations/
-.prisma/
-.prisma-client/
+# Prisma - More specific patterns
+/prisma/migrations/
+/prisma/.env
+/prisma/client/
+**/.prisma/
+**/.prisma-client/
+
+# Environment files - More specific
+/.env
+/.env.*
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Python - More specific
+/**/venv/
+/**/env/
+/**/__pycache__/
+*.pyc
+*.pyo
+
+# Dependencies - More specific
+/node_modules/
+/**/node_modules/
+/dist/
+/build/
 
 # OS generated files
 .DS_Store
