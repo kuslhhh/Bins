@@ -1,13 +1,10 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-*.so
-*.pyd
-*.pyo
+*$py.class
 
 # C extensions
-*.c
-*.cpp
+*.so
 
 # Distribution / packaging
 .Python
@@ -26,25 +23,20 @@ var/
 .installed.cfg
 *.egg
 
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Virtual environments
-venv/
-ENV/
-env/
-.venv/
-.env
-.env.*
-
-# Pytest
-.cache/
-.pytest_cache/
-
-# Coverage reports
+# Unit test / coverage reports
 htmlcov/
 .tox/
+.nox/
 .coverage
 .coverage.*
 .cache
@@ -52,22 +44,75 @@ nosetests.xml
 coverage.xml
 *.cover
 *.py,cover
+.hypothesis/
+.pytest_cache/
 
-# MyPy
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# PDM
+pdm.lock
+__pypackages__/
+
+# Environments
+.env
+.env.*
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# VSCode
+.vscode/
+
+# mypy
 .mypy_cache/
 .dmypy.json
 dmypy.json
 
-# Pyright or type checkers
-typings/
+# Pyre type checker
+.pyre/
 
-# FastAPI / Uvicorn logs
-*.log
+# pytype
+.pytype/
 
-# SQLite, DB, and local data
-*.sqlite
-*.sqlite3
-*.db
+# Cython debug symbols
+cython_debug/
 
 # Node
 node_modules/
@@ -82,13 +127,8 @@ prisma/migrations/
 .prisma/
 .prisma-client/
 
-# VSCode
-.vscode/
-
-# macOS
+# OS generated files
 .DS_Store
-
-# Windows
 Thumbs.db
 ehthumbs.db
 Desktop.ini
@@ -97,8 +137,15 @@ Desktop.ini
 .git/
 !.gitignore
 
+# Type checkers
+typings/
+
 # Misc
+*.sqlite
+*.sqlite3
+*.db
+*.pid
 *.bak
-*.tmp
 *.swp
+*.swo
 *~
