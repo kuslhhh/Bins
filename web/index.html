@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Binsh</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      background: #f9f9f9;
+      max-width: 700px;
+      margin: auto;
+    }
+    label {
+      display: block;
+      margin: 1rem 0 0.2rem;
+      font-weight: bold;
+    }
+    textarea, input, select {
+      width: 100%;
+      padding: 0.6rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: vertical;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 0.7rem 1.4rem;
+      font-size: 1rem;
+      background-color: #0070f3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #status {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Create a New Bin</h1>
+
+  <form id="binForm">
+    <label for="title">Title</label>
+    <input type="text" id="title" required />
+
+    <label for="content">Content</label>
+    <textarea id="content" rows="8" required></textarea>
+
+    <label for="language">Language</label>
+    <select id="language">
+      <option value="plaintext">Plain Text</option>
+      <option value="javascript">JavaScript</option>
+      <option value="python">Python</option>
+      <option value="json">JSON</option>
+    </select>
+
+    <label>
+      <input type="checkbox" id="wrap_text" /> Wrap Text
+    </label>
+
+    <label>
+      <input type="checkbox" id="burn_after_read" /> Burn After Read
+    </label>
+
+    <label for="expiry_choice">Expiry</label>
+    <select id="expiry_choice">
+      <option value="1h">1 Hour</option>
+      <option value="1d">1 Day</option>
+      <option value="1w">1 Week</option>
+      <option value="never">Never</option>
+    </select>
+
+    <button type="submit">Submit</button>
+    <div id="status"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById("binForm");
+    const statusDiv = document.getElementById("status");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const payload = {
+        title: document.getElementById("title").value,
+        content: document.getElementById("content").value,
+        language: document.getElementById("language").value,
+        wrap_text: document.getElementById("wrap_text").checked,
+        burn_after_read: document.getElementById("burn_after_read").checked,
+        expiry_choice: document.getElementById("expiry_choice").value
+      };
+
+      try {
+    const res = await fetch("http://localhost:5000/bin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+    console.log("Response:", data);
+
+    if (data.slug) {
+      const slugUrl = `http://localhost:5000/bin/${data.slug}`;
+      statusDiv.innerHTML = `Bin created! <br><a href="${slugUrl}" target="_blank">${slugUrl}</a>`;
+      window.location.href = `${slugUrl}`;
+    } else {
+      statusDiv.textContent = " Bin created, but no slug returned.";
+    }
+
+  } catch (err) {
+    statusDiv.textContent = " Failed to send data.";
+    console.error("Error:", err);
+  }
+    });
+  </script>
+
+</body>
+</html>

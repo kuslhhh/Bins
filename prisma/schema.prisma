@@ -1,0 +1,38 @@
+generator client {
+  provider             = "prisma-client-py"
+  recursive_type_depth = 5
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model bincontents {
+  id              String    @id @default(cuid())
+  slug            String    @unique
+  title           String?
+  content         String
+  language        String    @default("plaintext")
+  wrap_text       Boolean   @default(false)
+  burn_after_read Boolean   @default(false)
+  expires_at      DateTime?
+  created_at      DateTime  @default(now())
+  updated_at      DateTime  @updatedAt
+
+  user_meta UserMeta[] @relation("BinUserMeta")
+
+  @@map("bins")
+}
+
+model UserMeta {
+  id         String   @id @default(cuid())
+  bin_slug   String
+  ip_address String
+  user_agent String
+  timestamp  DateTime @default(now())
+  
+  bin bincontents @relation("BinUserMeta", fields: [bin_slug], references: [slug], onDelete: Cascade)
+
+  @@map("user_meta")
+}
