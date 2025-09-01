@@ -37,14 +37,14 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-4. Create a `.env` in the project root with at least:
+4. Create a `.env` in the project root with:
 
 ```
 DATABASE_URL=postgresql://postgres:postgres@localhost:5432/bins_db
 PORT: 3000
 ```
 
-5. Ensure Postgres is running (local or Docker).
+5. Ensure Postgres is running (local or Docker or you can get one on [neon.tech](https://console.neon.tech/)).
 
 6. Prisma: generate client and run migrations
 
@@ -79,5 +79,5 @@ http://localhost:5000/bin/
 # serve 
 npx serve web/index.html
 # open:
-http://localhost:5000
+http://localhost:3000
 ```
