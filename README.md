@@ -65,7 +65,7 @@ Open `http://localhost:5000/bin` to see the API (Swagger UI).
 
 ### Test `web/index.html` — quick options
 
-**1) With backend (FastAPI)** — serves static files at `/web`
+**1) With backend (FastAPI)** — serves static files at `/bin`
 
 ```bash
 # dev
